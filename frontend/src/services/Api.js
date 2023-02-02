@@ -18,6 +18,26 @@ const getRestaurants = async () => {
   }
 }
 
+const getRestaurantById = async (id) => {
+  try {
+    const response = await api.get(`/restaurants/${id}?populate=*`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const getDishesByRestaurantId = async (id) => {
+  try {
+    const response = await api.get(`/dishes?filters[restaurant][id][$eq]=${id}&populate=*`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
-  getRestaurants
+  getRestaurants,
+  getRestaurantById,
+  getDishesByRestaurantId
 }

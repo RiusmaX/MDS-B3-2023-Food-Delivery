@@ -13,6 +13,9 @@ function Navbar () {
         <li>
           <Link to='/restaurants'>Restaurants</Link>
         </li>
+        <li>
+          <Link to='/add-restaurant'>Ajouter un restaurant</Link>
+        </li>
       </ul>
     </nav>
   )

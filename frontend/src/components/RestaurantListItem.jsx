@@ -11,7 +11,7 @@ function RestaurantListItem ({ restaurant }) {
   return (
     <div className='card'>
       <div className='card-header'>
-        <img src={`${process.env.REACT_APP_IMG_URL}${attributes.photo.data.attributes.url}`} />
+        {attributes.photo && attributes.photo.data && attributes.photo.data.attributes && <img src={`${process.env.REACT_APP_IMG_URL}${attributes.photo.data.attributes.url}`} />}
         <div className='overlay'>
           <h2>{attributes.name}</h2>
         </div>

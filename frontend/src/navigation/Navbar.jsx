@@ -16,6 +16,9 @@ function Navbar () {
         <li>
           <Link to='/add-restaurant'>Ajouter un restaurant</Link>
         </li>
+        <li>
+          <Link to='/auth'>S'incrire / Se connecter</Link>
+        </li>
       </ul>
     </nav>
   )

@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
+import { saveToLocalStorage } from './LocalStorage'
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -55,9 +57,21 @@ const createRestaurant = async (formData) => {
   }
 }
 
+const login = async (credentials) => {
+  try {
+    const response = await api.post('/auth/local', credentials)
+    saveToLocalStorage('AUTH', response.data)
+    toast.success(`Hello ${response.data.user.firstName}, vous êtes connecté !`)
+    return response.data
+  } catch (error) {
+    toast.error('Identifiant ou mot de passe invalide :(')
+  }
+}
+
 export {
   getRestaurants,
   getRestaurantById,
   getDishesByRestaurantId,
-  createRestaurant
+  createRestaurant,
+  login
 }

@@ -1,52 +1,37 @@
 import { useState } from 'react'
+import LoginForm from '../components/LoginForm'
+import RegisterForm from '../components/RegisterForm'
+import { login } from '../services/Api'
 
 function Auth () {
-  const [credentials, setCredentials] = useState({
-    identifier: '',
-    password: ''
-  })
+  const [isRegister, setIsRegister] = useState(false)
 
-  const handleChange = (event) => {
-    const inputName = event.target.name
-    const inputValue = event.target.value
-    setCredentials({
-      ...credentials,
-      [inputName]: inputValue
-    })
+  const handleSubmit = (credentials) => {
+    login(credentials)
   }
 
-  const handleSubmit = (event) => {
+  const handleRegisterClick = (event) => {
     event.preventDefault()
-    console.log(credentials)
+    setIsRegister(!isRegister)
   }
 
   return (
     <>
       <h1>AUTHENTIFICATION</h1>
-      <form noValidate onSubmit={handleSubmit}>
-        <label>
-          Email :
-          <input
-            type='email'
-            name='identifier'
-            placeholder='toto@tata.fr'
-            onChange={handleChange}
-            value={credentials.identifier}
-          />
-        </label>
-        <br />
-        <label>
-          Mot de passe :
-          <input
-            type='password'
-            name='password'
-            onChange={handleChange}
-            value={credentials.password}
-          />
-        </label>
-        <br />
-        <input type='submit' value='Se connecter' />
-      </form>
+      {
+        isRegister
+          ? <RegisterForm />
+          : <LoginForm onSubmit={handleSubmit} />
+      }
+      <div>
+        <a onClick={handleRegisterClick} href=''>
+          {
+            isRegister
+              ? "J'ai déjà un compte"
+              : "Je n'ai pas de compte"
+          }
+        </a>
+      </div>
     </>
   )
 }

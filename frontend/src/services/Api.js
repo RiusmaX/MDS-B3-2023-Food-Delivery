@@ -68,10 +68,27 @@ const login = async (credentials) => {
   }
 }
 
+const register = async (infos) => {
+  try {
+    const response = await api.post('/auth/local/register', infos)
+    saveToLocalStorage('AUTH', response.data)
+    toast.success(`Hello ${response.data.user.firstName}, merci pour votre inscription !`)
+    return response.data
+  } catch (error) {
+    let errorMessage = error?.response?.data?.error?.message
+    if (error?.response?.data?.error?.details?.errors?.length > 0) {
+      errorMessage += ' ('
+      errorMessage += error?.response?.data?.error?.details?.errors?.map(e => e.message)
+      errorMessage += ') '
+    }
+    toast.error('Erreur lors de la création : ' + errorMessage)
+  }
+}
 export {
   getRestaurants,
   getRestaurantById,
   getDishesByRestaurantId,
   createRestaurant,
-  login
+  login,
+  register
 }

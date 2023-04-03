@@ -1,26 +1,51 @@
 import { Link } from 'react-router-dom'
 
+import '../styles/Navbar.scss'
+
 function Navbar () {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to='/'>Accueil</Link>
-        </li>
-        <li>
-          <Link to='/about'>A propos</Link>
-        </li>
-        <li>
-          <Link to='/restaurants'>Restaurants</Link>
-        </li>
-        <li>
-          <Link to='/add-restaurant'>Ajouter un restaurant</Link>
-        </li>
-        <li>
-          <Link to='/auth'>S'incrire / Se connecter</Link>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <nav className='navbar'>
+        <img src='/assets/img/logo.png' />
+        <ul>
+          <Link to='/'>
+            <li>
+              Accueil
+            </li>
+          </Link>
+          <Link to='/about'>
+            <li>
+              A propos
+            </li>
+          </Link>
+          <Link to='/restaurants'>
+            <li>
+              Restaurants
+              <ul>
+                <Link to='/add-restaurant'>
+                  <li>
+                    Ajouter un restaurant
+                  </li>
+                </Link>
+              </ul>
+            </li>
+          </Link>
+          <Link to='/auth'>
+            <li>
+              S'incrire / Se connecter
+            </li>
+          </Link>
+        </ul>
+        <button className='menu-btn'>H</button>
+      </nav>
+      <nav className='mobile-menu'>
+        <button className='mobile-menu-close'>X</button>
+        <Link to='/'>Accueil</Link>
+        <Link to='/'>Accueil</Link>
+        <Link to='/'>Accueil</Link>
+        <Link to='/'>Accueil</Link>
+      </nav>
+    </>
   )
 }
 

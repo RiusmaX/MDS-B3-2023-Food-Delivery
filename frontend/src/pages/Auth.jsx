@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import LoginForm from '../components/LoginForm'
 import RegisterForm from '../components/RegisterForm'
-import { login } from '../services/Api'
+import { login, register } from '../services/Api'
 
 function Auth () {
   const [isRegister, setIsRegister] = useState(false)
 
-  const handleSubmit = (credentials) => {
-    login(credentials)
+  const handleSubmit = (params) => {
+    if (isRegister) {
+      register(params)
+    } else {
+      login(params)
+    }
   }
 
   const handleRegisterClick = (event) => {
@@ -20,7 +24,7 @@ function Auth () {
       <h1>AUTHENTIFICATION</h1>
       {
         isRegister
-          ? <RegisterForm />
+          ? <RegisterForm onSubmit={handleSubmit} />
           : <LoginForm onSubmit={handleSubmit} />
       }
       <div>

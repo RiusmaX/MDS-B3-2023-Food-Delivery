@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import LoginForm from '../components/LoginForm'
 import RegisterForm from '../components/RegisterForm'
-import { login, register } from '../services/Api'
+import { register } from '../services/Api'
+import { useAuth } from '../contexts/AuthContext'
 
 function Auth () {
   const [isRegister, setIsRegister] = useState(false)
 
-  const handleSubmit = (params) => {
+  const { state, login } = useAuth()
+
+  const handleSubmit = async (params) => {
     if (isRegister) {
       register(params)
     } else {

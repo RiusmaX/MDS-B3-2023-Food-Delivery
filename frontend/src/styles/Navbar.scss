@@ -25,9 +25,9 @@
     flex-wrap: nowrap;
     margin: 0;
     list-style: none;
-    @media screen and (max-width: 700px) {
-      display: none;
-    }
+    // @media screen and (max-width: 700px) {
+    //   display: none;
+    // }
   }
   // Menu Item
   ul a li {
@@ -91,6 +91,6 @@
 .menu-btn {
   display: none;
   @media screen and (max-width: 700px) {
-    display: block;
+    // display: block;
   }
 }

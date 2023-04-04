@@ -58,14 +58,8 @@ const createRestaurant = async (formData) => {
 }
 
 const login = async (credentials) => {
-  try {
-    const response = await api.post('/auth/local', credentials)
-    saveToLocalStorage('AUTH', response.data)
-    toast.success(`Hello ${response.data.user.firstName}, vous êtes connecté !`)
-    return response.data
-  } catch (error) {
-    toast.error('Identifiant ou mot de passe invalide :(')
-  }
+  const response = await api.post('/auth/local', credentials)
+  return response.data
 }
 
 const register = async (infos) => {

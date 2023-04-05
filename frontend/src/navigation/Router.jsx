@@ -5,20 +5,35 @@ import Auth from '../pages/Auth'
 import Home from '../pages/Home'
 import Restaurant from '../pages/Restaurant'
 import Restaurants from '../pages/Restaurants'
+import { useAuth } from '../contexts/AuthContext'
 
 function Router () {
-  return (
-    <Routes>
-      <Route index path='/' element={<Home />} />
-      <Route path='/about' element={<About />} />
-      <Route path='/restaurants' element={<Restaurants />} />
-      <Route path='/restaurant'>
-        <Route path=':slug' element={<Restaurant />} />
-      </Route>
-      <Route path='/add-restaurant' element={<AddRestaurant />} />
-      <Route path='/auth' element={<Auth />} />
-    </Routes>
-  )
+  const { state: { isAuthenticated } } = useAuth()
+  if (isAuthenticated) {
+    return (
+      <Routes>
+        <Route index path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/restaurants' element={<Restaurants />} />
+        <Route path='/restaurant'>
+          <Route path=':slug' element={<Restaurant />} />
+        </Route>
+        <Route path='/add-restaurant' element={<AddRestaurant />} />
+      </Routes>
+    )
+  } else {
+    return (
+      <Routes>
+        <Route index path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/restaurants' element={<Restaurants />} />
+        <Route path='/restaurant'>
+          <Route path=':slug' element={<Restaurant />} />
+        </Route>
+        <Route path='/auth' element={<Auth />} />
+      </Routes>
+    )
+  }
 }
 
 export default Router

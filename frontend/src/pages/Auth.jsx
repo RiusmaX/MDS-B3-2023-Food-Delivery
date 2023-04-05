@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import LoginForm from '../components/LoginForm'
 import RegisterForm from '../components/RegisterForm'
-import { register } from '../services/Api'
 import { useAuth } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 function Auth () {
   const [isRegister, setIsRegister] = useState(false)
 
-  const { state, login } = useAuth()
+  const { login, register } = useAuth()
+  const navigate = useNavigate()
 
   const handleSubmit = async (params) => {
     if (isRegister) {
@@ -15,6 +16,7 @@ function Auth () {
     } else {
       login(params)
     }
+    navigate('/')
   }
 
   const handleRegisterClick = (event) => {

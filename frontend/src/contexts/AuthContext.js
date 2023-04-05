@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { login } from '../services/Api'
+import { login, register } from '../services/Api'
 
 const AuthContext = React.createContext()
 
 const actionTypes = {
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_FAILURE: 'LOGIN_FAILURE',
+  REGISTER_SUCCESS: 'REGISTER_SUCCESS',
+  REGISTER_FAILURE: 'REGISTER_FAILURE',
   LOADING: 'LOADING',
   LOGOUT: 'LOGOUT'
 }
@@ -30,6 +32,19 @@ const AuthReducer = (state, action) => {
         error: null
       }
     case actionTypes.LOGIN_FAILURE:
+      return {
+        ...initialState,
+        error: action.data.error
+      }
+    case actionTypes.REGISTER_SUCCESS:
+      return {
+        isAuthenticated: true,
+        token: action.data.jwt,
+        user: action.data.user,
+        loading: false,
+        error: null
+      }
+    case actionTypes.REGISTER_FAILURE:
       return {
         ...initialState,
         error: action.data.error
@@ -62,6 +77,33 @@ const AuthContextFactory = (dispatch) => ({
         data: { error }
       })
     }
+  },
+  register: async (userInfos) => {
+    try {
+      const result = await register(userInfos)
+      toast.success(`Hello, ${result.user.firstName}`)
+      dispatch({
+        type: actionTypes.REGISTER_SUCCESS,
+        data: result
+      })
+    } catch (error) {
+      let errorMessage = error?.response?.data?.error?.message
+      if (error?.response?.data?.error?.details?.errors?.length > 0) {
+        errorMessage += ' ('
+        errorMessage += error?.response?.data?.error?.details?.errors?.map(e => e.message)
+        errorMessage += ') '
+      }
+      toast.error('Erreur lors de la création : ' + errorMessage)
+      dispatch({
+        type: actionTypes.REGISTER_FAILURE,
+        data: { error: errorMessage }
+      })
+    }
+  },
+  logout: () => {
+    dispatch({
+      type: actionTypes.LOGOUT
+    })
   }
 })
 

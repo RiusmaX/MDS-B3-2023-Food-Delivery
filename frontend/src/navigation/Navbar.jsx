@@ -24,13 +24,17 @@ function Navbar () {
           <Link to='/restaurants'>
             <li>
               Restaurants
-              <ul>
-                <Link to='/add-restaurant'>
-                  <li>
-                    Ajouter un restaurant
-                  </li>
-                </Link>
-              </ul>
+              {
+                isAuthenticated && (
+                  <ul>
+                    <Link to='/add-restaurant'>
+                      <li>
+                        Ajouter un restaurant
+                      </li>
+                    </Link>
+                  </ul>
+                )
+              }
             </li>
           </Link>
           {

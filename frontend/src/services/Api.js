@@ -11,6 +11,21 @@ const api = axios.create({
   timeout: 10000
 })
 
+// Intercepteur pour ajouter le token (si il y en a un) à chaque requête
+api.interceptors.request.use(
+  config => {
+    const authState = window.localStorage.getItem('AUTH')
+    const auth = JSON.parse(authState)
+    if (auth.user && auth.token) {
+      config.headers.Authorization = `Bearer ${auth.token}`
+    }
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+
 const getRestaurants = async () => {
   try {
     const response = await api.get('/restaurants?populate=*')

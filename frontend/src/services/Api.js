@@ -18,7 +18,7 @@ api.interceptors.request.use(
     const auth = JSON.parse(authState)
     if (auth.user && auth.token) {
       config.headers.Authorization = `Bearer ${auth.token}`
-    }
+    } 
     return config
   },
   error => {

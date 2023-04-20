@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-
 import '../styles/Navbar.scss'
 import { useAuth } from '../contexts/AuthContext'
+import CartIcon from '../components/CartIcon'
 
 function Navbar () {
   const { state: { isAuthenticated, user } } = useAuth()
@@ -11,7 +11,7 @@ function Navbar () {
       <nav className='navbar'>
         <img src='/assets/img/logo.png' />
         <ul>
-          <Link to='/'>
+          {/* <Link to='/'>
             <li>
               Accueil
             </li>
@@ -20,7 +20,7 @@ function Navbar () {
             <li>
               A propos
             </li>
-          </Link>
+          </Link> */}
           <Link to='/restaurants'>
             <li>
               Restaurants
@@ -48,6 +48,11 @@ function Navbar () {
                 </Link>
                 )
           }
+          <Link to='/cart'>
+            <li>
+              <CartIcon />
+            </li>
+          </Link>
         </ul>
         <button className='menu-btn'>H</button>
       </nav>

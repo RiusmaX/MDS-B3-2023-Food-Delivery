@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import Restaurant from '../pages/Restaurant'
 import Restaurants from '../pages/Restaurants'
 import { useAuth } from '../contexts/AuthContext'
+import Cart from '../pages/Cart'
 
 function Router () {
   const { state: { isAuthenticated } } = useAuth()
@@ -19,6 +20,7 @@ function Router () {
           <Route path=':slug' element={<Restaurant />} />
         </Route>
         <Route path='/add-restaurant' element={<AddRestaurant />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
     )
   } else {
@@ -31,6 +33,7 @@ function Router () {
           <Route path=':slug' element={<Restaurant />} />
         </Route>
         <Route path='/auth' element={<Auth />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
     )
   }

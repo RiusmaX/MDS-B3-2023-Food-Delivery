@@ -1,8 +1,7 @@
 import DishListItem from './DishListItem'
 
 function DishList ({ dishes }) {
-  console.log(dishes)
-  return (
+  return dishes && (
     <div className='list-container'>
       {
         dishes.map(dish => {

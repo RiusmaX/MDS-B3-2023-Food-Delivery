@@ -21,6 +21,8 @@ function Restaurant () {
     getData()
   }, [])
 
+  console.log(dishes)
+
   if (!restaurant) {
     return <h1>Chargement...</h1>
   }
